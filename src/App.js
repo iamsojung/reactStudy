@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import TOC from "./components/TOC"
 import Content from "./components/Content"
 import Subject from "./components/Subject"
+
 import './App.css';
 
 //해당 CLS를 컴포넌트라고 칭함
-
 
 class App extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        mode:'read',
+        mode:'welcome',
           subject: { title: 'WEB', sub: 'World Wide Web!' },
           welcome: {title:'welcome',desc:'Hello, React!!'},
           contents: [
@@ -25,21 +25,24 @@ class App extends Component {
   render() {
     console.log("App render")
     var _title, _desc = null;
-    if(this.state.mode ==='welcome'){
+    if(this.state.mode ==='welcome'){ //state의 mode값이 'weclome' 일 때 
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
 
-    }else if(this.state.mode ==='read'){
+    }else if(this.state.mode ==='read'){ //state의 mode값이 'read' 일 때 실행
       _title = this.state.contents[0].title;
       _title = this.state.contents[0].desc;
 
-    }
-      return (
+    } return (
           <div className="App">
-              <Subject
-                  title={this.state.subject.title}
-                  sub={this.state.subject.sub}>
-              </Subject>
+              
+              <header>  
+                 <h1><a href="/" onClick={function (e){
+                  console.log(e);
+                  e.preventDefault();                  
+                }}>{this.state.subject.title}</a></h1>
+                {this.state.subject.sub}
+              </header>
               <TOC data={this.state.contents}></TOC>
               <Content title ={_title} desc = {_desc}></Content>
           </div>
