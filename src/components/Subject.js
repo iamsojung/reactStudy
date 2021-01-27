@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-
-//기존의 pure.html의 header부분을 바꾸고 싶은 것임 
-class Subject extends Component { 
-    render() { 
-      return ( 
-        <header>        
-          <h1 href = "/">{this.props.title}</h1>
-          {this.props.sub}
-        </header>
+class Subject extends Component {
+    render(){
+      console.log('Subject render');
+      return (
+        <header>
+            <h1><a href="/" onClick={function(e){
+              e.preventDefault();
+              this.props.onChangePage();
+            }.bind(this)}>{this.props.title}</a></h1>
+            {this.props.sub}
+        </header>  
       );
     }
   }
-  export default Subject;
+
+export default Subject;
